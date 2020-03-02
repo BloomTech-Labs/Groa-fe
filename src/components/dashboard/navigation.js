@@ -22,6 +22,9 @@ class Navigation extends Component {
         return(
 
             <div className="mainContainer">
+
+                {/* the top left bar icon */}
+
                 <div className="Bars">
                 <FontAwesomeIcon 
                 className='bars-icon' 
@@ -30,7 +33,8 @@ class Navigation extends Component {
               <i class="far fa-bars"></i>
                </div>
 
-        
+                {/* The links on top are here */}
+
                 <div className="Links">
                     
                 <NavLink className='Groa' to="/">
@@ -53,47 +57,44 @@ class Navigation extends Component {
                     Explore
                 </NavLink>
                 </div>
-              
-            
+
+                {/* The search inputs and icons are here */}
+
                 <div className='searchContainer'>
                 <FontAwesomeIcon 
                 className='search-icon' 
                 icon={faSearch}
                  />
                 <input className='searchBox'
-                type="text" 
-                //type='search'
+                type="text"
                 name="search" 
                 value={this.search} 
                 onChange={this.handleChange} 
-                placeholder= 'search...'/>
+                placeholder= 'Search...'/>
              </div>
+
+                {/* The icons are here */}  
 
              <FontAwesomeIcon 
                 className='bell-icon' 
                 icon={faBell}
               />
-                <i class="far fa-bell"></i>
                 
                 <FontAwesomeIcon 
                 className='question-icon' 
                 icon={faQuestionCircle}
               />
-                <i class="far fa-question-circle"></i>
 
                 <FontAwesomeIcon 
                 className='user-circle-icon' 
                 icon={faUserCircle}
               />
-                <i class="far fa-user-circle"></i>
 
                 <FontAwesomeIcon 
                 className='angle-down-icon' 
                 icon={faAngleDown}
               />
-               <i class="far fa-angle-down"></i>
-
-
+               
             </div>
         )
     }
