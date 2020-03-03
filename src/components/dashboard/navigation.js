@@ -30,7 +30,7 @@ class Navigation extends Component {
                 className='bars-icon' 
                 icon={faBars}
               />
-              <i class="far fa-bars"></i>
+              
                </div>
 
                 {/* The links on top are here */}
@@ -39,6 +39,10 @@ class Navigation extends Component {
                     
                 <NavLink className='Groa' to="/">
                     Groa 
+                </NavLink>
+
+                <NavLink className='NavLink' to="/dairy">
+                    Dairy
                 </NavLink>
 
                 <NavLink className='NavLink' to="/trending">
