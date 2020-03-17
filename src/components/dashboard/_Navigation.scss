@@ -127,7 +127,20 @@
     }
     .dropdown{
       color: white; 
+      height: 200px;
+      overflow-y: scroll;
+      font-size: 1.6rem;
     }
+    .dropdown li{
+      padding-top: 10px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #383838;
+      padding-left: 20px;
+      &:hover{
+        background-color: #333;
+      }
+    }
+
     .dropdown{
       display:none; 
     }
