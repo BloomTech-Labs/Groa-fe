@@ -19,6 +19,7 @@ class Navigation extends Component {
 
   handleChange = e => {
     this.setState({ search: e.target.value });
+    console.log('search status', this.state.search);
     this.props.setFilter(this.state.search);
     console.log(this.props.searchTerm);
   };
