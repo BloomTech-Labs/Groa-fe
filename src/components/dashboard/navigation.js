@@ -7,13 +7,14 @@ import { faBell, faQuestionCircle } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../dashboard/_Navigation.scss";
 import { ifDev } from "../../utils/removeAttribute.js";
-import { setFilter } from "../../store/actions/filterActions"; 
+import { setFilter, setFilterArray } from "../../store/actions/filterActions"; 
 
 class Navigation extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      search: ""
+      search: "",
+      year: ""
     };
   }
 
@@ -21,16 +22,17 @@ class Navigation extends Component {
     this.setState({ search: e.target.value });
     console.log('search status', this.state.search);
     this.props.setFilter(this.state.search);
+    this.props.setFilterArray(this.state.search);
     console.log(this.props.searchTerm);
   };
 
   handleFilter = (e) => { 
     e.preventDefault();
     e.persist()
-    this.setState({search: e.target.innerText})
-    this.props.setFilter(this.state.search)
+    this.setState({year: e.target.innerText})
+    this.props.setFilter(this.state)
     if(e.target.innerText){
-      this.props.setFilter(e.target.innerText)
+      this.props.setFilter({year: e.target.innerText})
     }else{
       this.props.setFilter("")
     }
@@ -45,7 +47,7 @@ class Navigation extends Component {
   submit2 = e => {
     e.preventDefault();
     this.props.setFilter(this.state.search);
-
+    this.props.setFilterArray(this.state.search);
   };
   
   logout = () => {
@@ -196,6 +198,13 @@ class Navigation extends Component {
               {/* hidden */}
               Explore
             </NavLink>
+            <NavLink
+              className="NavLink"
+              to={`/${this.props.userid}/filter`}
+            >
+              {/* hidden */}
+              Find Movies
+            </NavLink>
           </div>
           
           <form  onSubmit={this.submit2} className="searchContainer">
@@ -243,4 +252,4 @@ const mapStateToProps = state => {
     searchTerm: state.filter.searchTerm
   };
 };
-export default connect(mapStateToProps, { loginAction, setFilter })(Navigation);
+export default connect(mapStateToProps, { loginAction, setFilter, setFilterArray })(Navigation);

@@ -8,6 +8,7 @@ import Navigation from "./components/dashboard/navigation.js";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/login";
 import DataUpload from "./components/auth/dataUpload";
+import Filter from "./components/dashboard/Filter";
 
 // for testing
 import { ifDev } from "./utils/removeAttribute.js";
@@ -50,7 +51,8 @@ function App() {
               "/:userid/trending",
               "/:userid/watchlist",
               "/:userid/explore",
-              "/:userid/upload"
+              "/:userid/upload",
+              "/:userid/filter"
             ]}
             component={Navigation}
           />
@@ -58,6 +60,12 @@ function App() {
             exact
             path="/:userid/recommended"
             component={Recommendations}
+            data-test={ifDev("dash-component")}
+          />
+          <PrivateRoute
+            exact
+            path="/:userid/filter"
+            component={Filter}
             data-test={ifDev("dash-component")}
           />
           <Route exact path="/:userid/upload" component={DataUpload} />

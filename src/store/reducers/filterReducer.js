@@ -1,9 +1,11 @@
 import {
-    SET_FILTER_ITEM
+    SET_FILTER_ITEM,
+    SET_FILTER_ARRAY
 } from '../actions/filterActions.js';
 
 const initialState = {
-    searchTerm: ""
+    searchTerm: "",
+    searchArray: ""
 };
 
 export const filter = (state = initialState, action) => {
@@ -13,6 +15,11 @@ export const filter = (state = initialState, action) => {
             return {
                 ...state,
                 searchTerm: action.payload
+            }
+        case SET_FILTER_ARRAY:
+            return {
+                ...state,
+                searchArray: action.payload
             }
 
         default:

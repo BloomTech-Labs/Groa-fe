@@ -6,9 +6,9 @@ import { recommendationAction } from "../../store/actions/index.js";
 import "./_Dashboard.scss";
 // children components
 import LoadingScreen from "../layout/LoadingScreen.js";
-import MovieCard from "../movies/MovieCard.js";
+import MovieCard2 from "../movies/MovieCard2.js";
 
-function Recommendations({
+function Filter({
   isFetching,
   recommendations,
   userid,
@@ -29,20 +29,22 @@ function Recommendations({
         data-test={ifDev("recommendations-component")}
       >
         <h2>Your recommendations</h2>
-        
+        {console.log('searchTerm', searchTerm)}
         <div className="movie-cards">
-        {recommendations.filter(post =>
-        searchTerm !== '' ? post.Title.toString().toLowerCase().includes(searchTerm.toString().toLowerCase()) : true).map((x, index) =>{
+        {searchArray.length > 0 ? searchArray.filter(post =>
+        searchTerm !== '' ? searchTerm.year ? post.Year.toString().toLowerCase().includes(searchTerm.year.toString().toLowerCase()) : post.Title.toString().toLowerCase().includes(searchTerm.toString().toLowerCase()) : true).map((x, index) =>{
             let posterURI = x["Poster URL"];
             let unsplashUrl =
               "https://source.unsplash.com/collection/1736993/500x650";
             let moviePoster = `https://image.tmdb.org/t/p/w500${posterURI}?api_key=${process.env.REACT_APP_TMDB_API_KEY}`;
 
             return (
-              <MovieCard
+              <MovieCard2
                 key={index}
                 name={x.Title}
                 year={x.Year}
+                genres={x.Genres}
+                runtime={x.Runtime}
                 image={
                   !posterURI ||
                   posterURI === "None" ||
@@ -54,7 +56,7 @@ function Recommendations({
                 }
               />
             );
-          })}
+          }) : false}
         </div>
         {/* <div className="movie-cards">
           {recommendations.map((x, index) => {
@@ -97,5 +99,5 @@ const mapStateToProps = state => {
   };
 };
 export default connect(mapStateToProps, { recommendationAction })(
-  Recommendations
+  Filter
 );
