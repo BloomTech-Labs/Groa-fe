@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { Route, useHistory } from "react-router-dom";
-import { Security, SecureRoute, LoginCallback } from "@okta/okta-react";
+import { Route } from "react-router-dom";
+import { Security, LoginCallback } from "@okta/okta-react";
 import { oktaConfig as config } from "./config/oktaConfig.js";
 
 // local imports

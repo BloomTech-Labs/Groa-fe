@@ -1,0 +1,68 @@
+.container.login-component {
+  font-family: $workSans;
+  min-height: 100vh;
+  color: white;
+  background-image: linear-gradient(
+    to bottom,
+    black 0%,
+    rgba(0, 0, 0, 0.9),
+    rgba(0, 0, 0, 0.7),
+    rgba(0, 0, 0, 0.85)
+  );
+  .onboarding-nav {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.5% 1%;
+  }
+
+  .box-container {
+    display: flex;
+    margin: 7% auto;
+  }
+  .box-left {
+    width: 40%;
+    margin: auto;
+    .logo {
+      width: 100%;
+      max-width: 926px;
+      height: auto;
+    }
+  }
+  .box-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+    padding: 3%;
+    border-radius: 4px;
+    background: white;
+    width: 100%;
+    max-width: 518px;
+    height: auto;
+    color: $black;
+    #okta-sign-in.auth-container.main-container.no-beacon {
+      margin: auto;
+      @include display-flex();
+      h2.okta-form-title.o-form-head {
+        font-size: $baseFontSize * 2.8;
+      }
+      div.okta-form-label.o-form-label {
+        display: none;
+      }
+      input#okta-signin-submit.button.button-primary {
+        border: none;
+        width: 100%;
+        max-width: 115px;
+        height: 36px;
+        border-radius: 4px;
+        background: #21242c;
+        color: white;
+        font-size: 14px;
+        &:hover {
+          background: gray;
+          color: #21242c;
+        }
+      }
+    }
+  }
+}

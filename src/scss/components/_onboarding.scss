@@ -50,13 +50,15 @@
       font-size: 20px;
     }
     .form {
-      margin: auto;
+      margin: 0 auto;
       padding: 3%;
       max-width: 393px;
       width: 100%;
     }
 
-    .form-control {
+    .form-control,
+    #okta-signin-username,
+    #okta-signin-password {
       border-radius: 4px;
       border: 1px solid black;
       max-width: 370px;

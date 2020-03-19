@@ -62,7 +62,7 @@ class Register extends React.Component {
         data-test={ifDev("register-component")}
       >
         <div className="onboarding-nav registerNav">
-          <RegisterNavLinks />
+          <RegisterNavLinks updateUnmounted={this.props.setUnmounted} />
         </div>
         <div className="boxHolder box-container">
           <div className="box-left">
