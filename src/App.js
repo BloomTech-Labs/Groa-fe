@@ -42,7 +42,6 @@ function App() {
 
   return (
     <Provider store={store}>
-<<<<<<< HEAD
       <Security {...config}>
         <Router>
           <div className="App" data-test={ifDev("App-component")}>
@@ -71,37 +70,6 @@ function App() {
           </div>
         </Router>
       </Security>
-=======
-      <Router>
-        <div className="App" data-test={ifDev("App-component")}>
-         
-          
-          {/* this is fine as a route because all of the routes that will have display their component will only be avalible on a private route */}
-          <Route
-            exact
-            path={[
-              "/:userid/recommended",
-              "/:userid/trending",
-              "/:userid/watchlist",
-              "/:userid/explore",
-              "/:userid/upload"
-            ]}
-            component={Navigation}
-          />
-          <PrivateRoute
-            exact
-            path="/:userid/recommended"
-            component={Recommendations}
-            data-test={ifDev("dash-component")}
-          />
-          <Route exact path="/:userid/upload" component={DataUpload} />
-          <Route path="/login" component={Login} />
-          <Route exact path={["/", "/register"]} component={Register} />
-          {/* this could be a modal */}
-          {/* <Route path="/congrats" component={Congrats} /> */}
-        </div>
-      </Router>
->>>>>>> 3d82b6e29d9d1e78f9558cb152b6fc89c1b1aa0c
     </Provider>
   );
 }
