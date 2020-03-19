@@ -7,7 +7,8 @@ export const setFilter  = (item) => {
 }
 export const setFilterArray = (item) => {
      return dispatch => {
-          axiosWithAuth().post(`/movies`, {search: item})
+          const {search, year, submit, genres} = item; 
+          axiosWithAuth().post(`/movies`, {search: search, submit: submit, genres: genres, year: year})
           .then(res => { 
                console.log(res)
                dispatch({type: SET_FILTER_ARRAY, payload: res.data})

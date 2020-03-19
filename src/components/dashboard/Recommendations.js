@@ -32,7 +32,7 @@ function Recommendations({
         
         <div className="movie-cards">
         {recommendations.filter(post =>
-        searchTerm !== '' ? post.Title.toString().toLowerCase().includes(searchTerm.toString().toLowerCase()) : true).map((x, index) =>{
+        searchTerm.search !== '' ? post.Title.toString().toLowerCase().includes(searchTerm.toString().toLowerCase()) : true).map((x, index) =>{
             let posterURI = x["Poster URL"];
             let unsplashUrl =
               "https://source.unsplash.com/collection/1736993/500x650";

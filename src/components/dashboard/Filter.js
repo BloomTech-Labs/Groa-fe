@@ -32,8 +32,8 @@ function Filter({
         {console.log('searchTerm', searchTerm)}
         <div className="movie-cards">
         {searchArray.length > 0 ? searchArray.filter(post =>
-        searchTerm !== '' ? searchTerm.year ? post.Year.toString().toLowerCase().includes(searchTerm.year.toString().toLowerCase()) : post.Title.toString().toLowerCase().includes(searchTerm.toString().toLowerCase()) : true).map((x, index) =>{
-            let posterURI = x["Poster URL"];
+        searchTerm !== '' ?  post.Title.toString().toLowerCase().includes(searchTerm.toString().toLowerCase()) : true).map((x, index) =>{
+            let posterURI = x.Poster;
             let unsplashUrl =
               "https://source.unsplash.com/collection/1736993/500x650";
             let moviePoster = `https://image.tmdb.org/t/p/w500${posterURI}?api_key=${process.env.REACT_APP_TMDB_API_KEY}`;

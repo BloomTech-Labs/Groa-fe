@@ -14,7 +14,9 @@ class Navigation extends Component {
     super(props);
     this.state = {
       search: "",
-      year: ""
+      year: "",
+      genres: "", 
+      submit: false
     };
   }
 
@@ -22,7 +24,7 @@ class Navigation extends Component {
     this.setState({ search: e.target.value });
     console.log('search status', this.state.search);
     this.props.setFilter(this.state.search);
-    this.props.setFilterArray(this.state.search);
+    this.props.setFilterArray(this.state);
     console.log(this.props.searchTerm);
   };
 
@@ -32,7 +34,19 @@ class Navigation extends Component {
     this.setState({year: e.target.innerText})
     this.props.setFilter(this.state)
     if(e.target.innerText){
-      this.props.setFilter({year: e.target.innerText})
+      this.props.setFilterArray(this.state)
+    }else{
+      this.props.setFilter("")
+    }
+    console.log(e.target.innerText)
+  }
+  handleFilter2 = (e) => { 
+    e.preventDefault();
+    e.persist()
+    this.setState({genres: e.target.innerText})
+    this.props.setFilter(this.state)
+    if(e.target.innerText){
+      this.props.setFilterArray(this.state)
     }else{
       this.props.setFilter("")
     }
@@ -46,8 +60,12 @@ class Navigation extends Component {
 
   submit2 = e => {
     e.preventDefault();
+    e.persist();
+    const {search,year,genres,submit} = this.state
+    this.setState({submit: true})
     this.props.setFilter(this.state.search);
-    this.props.setFilterArray(this.state.search);
+    this.props.setFilterArray(this.state);
+    // this.setState({})
   };
   
   logout = () => {
@@ -78,8 +96,15 @@ class Navigation extends Component {
               </div>
               <ul>
                 
+                <li onClick={this.submit2} className = "Genre"><a href="#">Apply filter</a></li>
                 <li onClick={this.handleClear} className = "Genre"><a href="#">Clear</a></li>
-                <li className = "Genre"><a href="#">Genre</a></li>
+                <li className = "Genre"><a href="#">Genre</a>
+                <ul className="dropdown">
+                <li onClick={this.handleFilter2}>Action</li>
+                </ul>
+                
+                </li>
+
                 <li className= "Year"><a href="#">Year</a>
                 <ul className="dropdown">
                   <li onClick={this.handleFilter}>2020</li>
