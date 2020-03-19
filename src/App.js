@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
-import { Route } from "react-router-dom";
+import { Route, useHistory } from "react-router-dom";
+import { Security, SecureRoute, LoginCallback } from "@okta/okta-react";
+import { oktaConfig as config } from "./config/oktaConfig.js";
 
 // local imports
 import PrivateRoute from "./utils/privateRoute.js";
@@ -40,33 +42,34 @@ function App() {
 
   return (
     <Provider store={store}>
-      <Router>
-        <div className="App" data-test={ifDev("App-component")}>
-          {/* this is fine as a route because all of the routes that will have display their component will only be avalible on a private route */}
-          <Route
-            exact
-            path={[
-              "/:userid/recommended",
-              "/:userid/trending",
-              "/:userid/watchlist",
-              "/:userid/explore",
-              "/:userid/upload"
-            ]}
-            component={Navigation}
-          />
-          <PrivateRoute
-            exact
-            path="/:userid/recommended"
-            component={Recommendations}
-            data-test={ifDev("dash-component")}
-          />
-          <Route exact path="/:userid/upload" component={DataUpload} />
-          <Route path="/login" component={Login} />
-          <Route exact path={["/", "/register"]} component={Register} />
-          {/* this could be a modal */}
-          {/* <Route path="/congrats" component={Congrats} /> */}
-        </div>
-      </Router>
+      <Security {...config}>
+        <Router>
+          <div className="App" data-test={ifDev("App-component")}>
+            {/* this is fine as a route because all of the routes that will have display their component will only be avalible on a private route */}
+            <Route
+              exact
+              path={[
+                "/:userid/recommended",
+                "/:userid/trending",
+                "/:userid/watchlist",
+                "/:userid/explore",
+                "/:userid/upload"
+              ]}
+              component={Navigation}
+            />
+            <PrivateRoute
+              exact
+              path="/:userid/recommended"
+              component={Recommendations}
+              data-test={ifDev("dash-component")}
+            />
+            <Route exact path="/:userid/upload" component={DataUpload} />
+            <Route path="/implicit/callback" component={LoginCallback} />
+            <Route path="/login" component={Login} />
+            <Route exact path={["/", "/register"]} component={Register} />
+          </div>
+        </Router>
+      </Security>
     </Provider>
   );
 }
