@@ -101,6 +101,26 @@ class Navigation extends Component {
                 <li className = "Genre"><a href="#">Genre</a>
                 <ul className="dropdown">
                 <li onClick={this.handleFilter2}>Action</li>
+                <li onClick={this.handleFilter2}>Adventure</li>
+                <li onClick={this.handleFilter2}>Animation</li>
+                <li onClick={this.handleFilter2}>Comedy</li>
+                <li onClick={this.handleFilter2}>Crime</li>
+                <li onClick={this.handleFilter2}>Documentary</li>
+                <li onClick={this.handleFilter2}>Drama</li>
+                <li onClick={this.handleFilter2}>Family</li>
+                <li onClick={this.handleFilter2}>Foreign</li>
+                <li onClick={this.handleFilter2}>History</li>
+                <li onClick={this.handleFilter2}>Horror</li>
+                <li onClick={this.handleFilter2}>Music</li>
+                <li onClick={this.handleFilter2}>Mystery</li>
+                <li onClick={this.handleFilter2}>Romance</li>
+                <li onClick={this.handleFilter2}>Sci-Fi</li>
+                <li onClick={this.handleFilter2}>Mystery</li>
+                <li onClick={this.handleFilter2}>Sports</li>
+                <li onClick={this.handleFilter2}>Thriller</li>
+                <li onClick={this.handleFilter2}>TV movie</li>
+                <li onClick={this.handleFilter2}>War</li>
+                <li onClick={this.handleFilter2}>Western</li>
                 </ul>
                 
                 </li>
