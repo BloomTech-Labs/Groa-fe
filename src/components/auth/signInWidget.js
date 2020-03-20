@@ -22,5 +22,10 @@ export const signInWidget = new OktaSignIn({
     issuer,
     display: "page",
     scopes
+  },
+  features: {
+    registration: true,
+    rememberMe: true,
+    router: true
   }
 });
