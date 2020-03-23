@@ -23,18 +23,18 @@ import thunk from "redux-thunk";
 import logger from "redux-logger";
 import { reducer } from "./store/reducers";
 import { BrowserRouter as Router } from "react-router-dom";
-import {loadState, saveState } from "./store/localStorage.js";
+import { loadState, saveState } from "./store/localStorage.js";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   reducer,
   loadState(),
-  composeEnhancers(applyMiddleware(thunk, logger)),
+  composeEnhancers(applyMiddleware(thunk, logger))
 );
 
 store.subscribe(() => {
-  saveState(store.getState())
-})
+  saveState(store.getState());
+});
 
 function App() {
   useEffect(() => reactGAinitialization(), []);
@@ -43,6 +43,8 @@ function App() {
     <Provider store={store}>
       <Router>
         <div className="App" data-test={ifDev("App-component")}>
+         
+          
           {/* this is fine as a route because all of the routes that will have display their component will only be avalible on a private route */}
           <Route
             exact

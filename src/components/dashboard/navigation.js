@@ -2,13 +2,19 @@ import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { loginAction } from "../../store/actions/loginAction";
-import { faSearch, faUserCircle, faAngleDown, faBars} from "@fortawesome/free-solid-svg-icons";
+import { recommendationAction } from "../../store/actions/recommendationActions";
+import {
+  faSearch,
+  faUserCircle,
+  faAngleDown,
+  faBars,
+  faSyncAlt
+} from "@fortawesome/free-solid-svg-icons";
 import { faBell, faQuestionCircle } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "../dashboard/_Navigation.scss";
 import { ifDev } from "../../utils/removeAttribute.js";
 import { setFilter, setFilterArray } from "../../store/actions/filterActions"; 
-
+import "../../scss/components/_navigation.scss";
 class Navigation extends Component {
   constructor(props) {
     super(props);
@@ -18,6 +24,9 @@ class Navigation extends Component {
       genres: "", 
       submit: false
     };
+    this.handleChange = this.handleChange.bind(this);
+    this.logout = this.logout.bind(this);
+    this.getNewRecommendations = this.getNewRecommendations.bind(this);
   }
 
   handleChange = e => {
@@ -71,7 +80,12 @@ class Navigation extends Component {
   logout = () => {
     localStorage.removeItem("token");
   };
-  
+
+  getNewRecommendations = (id) => {
+    // Gets new recommendations for account, if applicible
+    this.props.recommendationAction(id)
+  }
+
   render() {
     const {setState} = this.props
     return (
@@ -222,8 +236,9 @@ class Navigation extends Component {
 
             <NavLink
               className="NavLink"
+              onClick={this.logout}
+              data-test={ifDev("logoutBtn")}
               to="/login"
-              onClick={this.state.logout}
             >
               Logout
             </NavLink>
@@ -297,4 +312,6 @@ const mapStateToProps = state => {
     searchTerm: state.filter.searchTerm
   };
 };
-export default connect(mapStateToProps, { loginAction, setFilter, setFilterArray })(Navigation);
+export default connect(mapStateToProps, 
+  { loginAction, setFilter, setFilterArray,recommendationAction
+})(Navigation);

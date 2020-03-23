@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { ifDev } from "../../utils/removeAttribute.js";
 import { recommendationAction } from "../../store/actions/index.js";
-import "./_Dashboard.scss";
+
 // children components
 import LoadingScreen from "../layout/LoadingScreen.js";
 import MovieCard2 from "../movies/MovieCard2.js";
@@ -28,7 +28,7 @@ function Filter({
         className="container recommendations"
         data-test={ifDev("recommendations-component")}
       >
-        <h2>Your recommendations</h2>
+        
         {console.log('searchTerm', searchTerm)}
         <div className="movie-cards">
         {searchArray.length > 0 ? searchArray.filter(post =>

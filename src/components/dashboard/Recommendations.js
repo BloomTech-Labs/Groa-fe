@@ -2,25 +2,25 @@ import React, { useEffect } from "react";
 // tools
 import { connect } from "react-redux";
 import { ifDev } from "../../utils/removeAttribute.js";
-import { recommendationAction } from "../../store/actions/index.js";
-import "./_Dashboard.scss";
+import { recommendedAction } from "../../store/actions/index.js";
 // children components
 import LoadingScreen from "../layout/LoadingScreen.js";
 import MovieCard from "../movies/MovieCard.js";
+
 
 function Recommendations({
   isFetching,
   recommendations,
   userid,
-  recommendationAction,
-  isUploading,
-  searchTerm,
-  searchArray
+  recommendedAction,
+  isUploading, 
+  searchTerm
 }) {
   useEffect(() => {
-    recommendationAction(userid);
-  }, [userid, recommendationAction, isUploading]);
-  
+    // Returns the most recent recommendations from the database
+    recommendedAction(userid);
+  }, [userid, recommendedAction, recommendations, isUploading]);
+
   if (isFetching) return <LoadingScreen />;
   else
     return (
@@ -52,6 +52,7 @@ function Recommendations({
                     ? unsplashUrl
                     : moviePoster
                 }
+                
               />
             );
           })}
@@ -96,6 +97,6 @@ const mapStateToProps = state => {
     searchArray: state.filter.searchArray
   };
 };
-export default connect(mapStateToProps, { recommendationAction })(
+export default connect(mapStateToProps, { recommendedAction })(
   Recommendations
 );
