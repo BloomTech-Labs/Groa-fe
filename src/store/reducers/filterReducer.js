@@ -23,7 +23,7 @@ export const filter = (state = initialState, action) => {
             return {
                 ...state,
                 searchArray: action.payload,
-                
+                isFetchingFilter: false
             }
 
         case IS_FETCHING: 

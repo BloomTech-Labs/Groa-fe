@@ -3,10 +3,12 @@ import {
     ADDING_RATING_SUCCESS,
     ADDING_RATING_FAIL
   } from "../actions/ratingAction";
+
   
   const initialState = {
     isAdding: false,
-    error: ""
+    error: "",
+    response: null
   };
   
   export const rating = (state = initialState, action) => {
@@ -21,7 +23,7 @@ import {
         return {
           ...state,
           isAdding: false,
-        
+          response: action.payload
         };
   
       //ADD RATING FAIL

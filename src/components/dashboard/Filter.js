@@ -1,21 +1,23 @@
-import React, { useEffect } from "react";
+import React from "react";
 // tools
 import { connect } from "react-redux";
 import { ifDev } from "../../utils/removeAttribute.js";
-import { recommendationAction } from "../../store/actions/index.js";
+import { ratingAction } from "../../store/actions/index.js";
 
 // children components
 import LoadingScreen from "../layout/LoadingScreen.js";
 import MovieCard2 from "../movies/MovieCard2.js";
 
 function Filter({
-  isFetching,
+  userid,
   searchTerm,
   searchArray,
-  isFetchingFilter
+  isFetchingFilter,
+  ratingAction,
+  response
 }) {
   
-  if (isFetchingFilter == true) return <LoadingScreen />;
+  if (isFetchingFilter === true) return <LoadingScreen />;
   else
     return (
       <div
@@ -23,7 +25,7 @@ function Filter({
         data-test={ifDev("recommendations-component")}
       >
         
-        {console.log('searchTerm', searchTerm)}
+        {console.log('response add rating', response)}
         <div className="movie-cards">
         {searchArray.length > 0 ? searchArray.filter(post =>
         searchTerm !== '' ?  post.Title.toString().toLowerCase().includes(searchTerm.toString().toLowerCase()) : true).map((x, index) =>{
@@ -40,6 +42,8 @@ function Filter({
                 genres={x.Genres}
                 runtime={x.Runtime}
                 avgRating = {x.Average_Rating}
+                userid = {userid}
+                ratingAction = {ratingAction}
                 image={
                   !posterURI ||
                   posterURI === "None" ||
@@ -66,9 +70,10 @@ const mapStateToProps = state => {
     isUploading: state.upload.isUploading,
     searchTerm: state.filter.searchTerm,
     searchArray: state.filter.searchArray,
-    isFetchingFilter: state.filter.isFetchingFilter
+    isFetchingFilter: state.filter.isFetchingFilter,
+    response: state.rating.response
   };
 };
-export default connect(mapStateToProps, { recommendationAction })(
+export default connect(mapStateToProps, { ratingAction })(
   Filter
 );
