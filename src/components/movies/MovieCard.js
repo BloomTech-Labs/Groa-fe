@@ -15,7 +15,6 @@ export default function MovieCard({ name, year, image}) {
       <div className="text-container">
         <h3>{name}</h3>
         <p>{year}</p>
-
         <Stars data-test="star"
         precision={0.5}
           name={name}

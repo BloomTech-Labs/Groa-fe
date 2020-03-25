@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import Stars from "@material-ui/lab/Rating";
 // more fields will be appearing according to the Figma file
-export default function MovieCard2({ name, year, image, genres, runtime }) {
+export default function MovieCard2({ name, year, image, genres, runtime, avgRating}) {
   const [value, setValue] = useState(0);
  
  
@@ -16,7 +16,7 @@ export default function MovieCard2({ name, year, image, genres, runtime }) {
         <Stars data-test="star"
         precision={0.5}
           name={name}
-          value={value}
+          value={value ? value : avgRating/2.0}
           onChange={(event, newValue) => {
             setValue(newValue);
           }}

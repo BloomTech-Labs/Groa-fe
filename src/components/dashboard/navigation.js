@@ -36,7 +36,7 @@ class Navigation extends Component {
     this.props.setFilterArray(this.state);
     console.log(this.props.searchTerm);
   };
-
+  //filters year
   handleFilter = (e) => { 
     e.preventDefault();
     e.persist()
@@ -49,7 +49,8 @@ class Navigation extends Component {
     }
     console.log(e.target.innerText)
   }
-  handleFilter2 = (e) => { 
+  //filters genre
+  genreFilter = (e) => { 
     e.preventDefault();
     e.persist()
     this.setState({genres: e.target.innerText})
@@ -64,7 +65,10 @@ class Navigation extends Component {
   handleClear = (e) => { 
     e.preventDefault();
     this.props.setFilter("")
-    this.setState({search: ""})
+    this.setState({search: "",
+      year: "",
+      genres: "", 
+      submit: false})
   }
 
   submit2 = e => {
@@ -86,8 +90,10 @@ class Navigation extends Component {
     this.props.recommendationAction(id)
   }
 
+  
   render() {
     const {setState} = this.props
+    const genresArray = ['Documentary','Drama','Horror','Mystery','Adventure','History','Musical','Action','Comedy','Thriller','Crime','Romance','Biography', 'Music', '\\N','Family', 'Sci-Fi', 'Fantasy','Western', 'Sport','Animation','War','Adult','Reality-TV', 'News', 'Talk-Show','Game-Show','Film-Noir']
     return (
       <div className="mainContainer" data-test={ifDev("navigation")}>
         <div className="navContainer">
@@ -114,27 +120,10 @@ class Navigation extends Component {
                 <li onClick={this.handleClear} className = "Genre"><a href="#">Clear</a></li>
                 <li className = "Genre"><a href="#">Genre</a>
                 <ul className="dropdown">
-                <li onClick={this.handleFilter2}>Action</li>
-                <li onClick={this.handleFilter2}>Adventure</li>
-                <li onClick={this.handleFilter2}>Animation</li>
-                <li onClick={this.handleFilter2}>Comedy</li>
-                <li onClick={this.handleFilter2}>Crime</li>
-                <li onClick={this.handleFilter2}>Documentary</li>
-                <li onClick={this.handleFilter2}>Drama</li>
-                <li onClick={this.handleFilter2}>Family</li>
-                <li onClick={this.handleFilter2}>Foreign</li>
-                <li onClick={this.handleFilter2}>History</li>
-                <li onClick={this.handleFilter2}>Horror</li>
-                <li onClick={this.handleFilter2}>Music</li>
-                <li onClick={this.handleFilter2}>Mystery</li>
-                <li onClick={this.handleFilter2}>Romance</li>
-                <li onClick={this.handleFilter2}>Sci-Fi</li>
-                <li onClick={this.handleFilter2}>Mystery</li>
-                <li onClick={this.handleFilter2}>Sports</li>
-                <li onClick={this.handleFilter2}>Thriller</li>
-                <li onClick={this.handleFilter2}>TV movie</li>
-                <li onClick={this.handleFilter2}>War</li>
-                <li onClick={this.handleFilter2}>Western</li>
+                {
+                  genresArray.map(x => { return <li onClick={this.genreFilter}>{x}</li>})
+
+                }
                 </ul>
                 
                 </li>
@@ -195,11 +184,14 @@ class Navigation extends Component {
                 </ul>
                 </li>
 
-                <li><a href="#">Decade</a></li>
-                <li><a href="#">MPAA Rating</a></li>
+                {/* We also wanted to implement sorting by these criteria as well, but ran out of
+                time to do so. */}
+
+                {/* <li><a href="#">Decade</a></li> */}
+                {/* <li><a href="#">MPAA Rating</a></li>
                 <li><a href="#">Language</a></li>
                 <li><a href="#">Streaming platform</a></li> 
-                <li><a href="#">Sort</a></li> 
+                <li><a href="#">Sort</a></li>  */}
                 {/* By actor, director, screenwriter, cigematographer(sort by  */}
               </ul>
             </nav>
@@ -215,7 +207,7 @@ class Navigation extends Component {
             </NavLink>
 
             <NavLink
-              className="NavLink"
+              className="NavLink hidden"
               to={`/${this.props.userid}/trending`}
             >
               {/* hidden */}
@@ -250,9 +242,11 @@ class Navigation extends Component {
               {/* hidden */}
               Watchlist
             </NavLink>
-
+                {/* --------------------------marked hidden links above and below in classNames
+                ----------in future delete the word hidden from classname and to add links
+                ------to nav bar */}
             <NavLink
-              className="NavLink"
+              className="NavLink hidden"
               to={`/${this.props.userid}/explore`}
             >
               {/* hidden */}

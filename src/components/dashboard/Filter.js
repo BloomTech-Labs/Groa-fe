@@ -10,18 +10,12 @@ import MovieCard2 from "../movies/MovieCard2.js";
 
 function Filter({
   isFetching,
-  recommendations,
-  userid,
-  recommendationAction,
-  isUploading,
   searchTerm,
-  searchArray
+  searchArray,
+  isFetchingFilter
 }) {
-  useEffect(() => {
-    recommendationAction(userid);
-  }, [userid, recommendationAction, isUploading]);
   
-  if (isFetching) return <LoadingScreen />;
+  if (isFetchingFilter == true) return <LoadingScreen />;
   else
     return (
       <div
@@ -45,6 +39,7 @@ function Filter({
                 year={x.Year}
                 genres={x.Genres}
                 runtime={x.Runtime}
+                avgRating = {x.Average_Rating}
                 image={
                   !posterURI ||
                   posterURI === "None" ||
@@ -58,31 +53,6 @@ function Filter({
             );
           }) : false}
         </div>
-        {/* <div className="movie-cards">
-          {recommendations.map((x, index) => {
-            let posterURI = x["Poster URL"];
-            let unsplashUrl =
-              "https://source.unsplash.com/collection/1736993/500x650";
-            let moviePoster = `https://image.tmdb.org/t/p/w500${posterURI}?api_key=${process.env.REACT_APP_TMDB_API_KEY}`;
-
-            return (
-              <MovieCard
-                key={index}
-                name={x.Title}
-                year={x.Year}
-                image={
-                  !posterURI ||
-                  posterURI === "None" ||
-                  posterURI === "No poster" ||
-                  posterURI === "No Poster" ||
-                  posterURI === "Not in table"
-                    ? unsplashUrl
-                    : moviePoster
-                }
-              />
-            );
-          })}
-        </div> */}
       </div>
     );
 }
@@ -95,7 +65,8 @@ const mapStateToProps = state => {
     recommendationsError: state.recommendations.error,
     isUploading: state.upload.isUploading,
     searchTerm: state.filter.searchTerm,
-    searchArray: state.filter.searchArray
+    searchArray: state.filter.searchArray,
+    isFetchingFilter: state.filter.isFetchingFilter
   };
 };
 export default connect(mapStateToProps, { recommendationAction })(

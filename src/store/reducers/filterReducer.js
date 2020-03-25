@@ -1,11 +1,13 @@
 import {
     SET_FILTER_ITEM,
-    SET_FILTER_ARRAY
+    SET_FILTER_ARRAY,
+    IS_FETCHING
 } from '../actions/filterActions.js';
 
 const initialState = {
     searchTerm: "",
-    searchArray: ""
+    searchArray: "",
+    isFetchingFilter: false
 };
 
 export const filter = (state = initialState, action) => {
@@ -14,14 +16,21 @@ export const filter = (state = initialState, action) => {
         case SET_FILTER_ITEM:
             return {
                 ...state,
-                searchTerm: action.payload
+                searchTerm: action.payload,
+                
             }
         case SET_FILTER_ARRAY:
             return {
                 ...state,
-                searchArray: action.payload
+                searchArray: action.payload,
+                
             }
 
+        case IS_FETCHING: 
+            return {
+                ...state, 
+                isFetchingFilter: true
+            }
         default:
             return state;
     }
