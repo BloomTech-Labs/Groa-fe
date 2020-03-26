@@ -27,6 +27,9 @@ class Navigation extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.logout = this.logout.bind(this);
     this.getNewRecommendations = this.getNewRecommendations.bind(this);
+    this.ApplyFilter = this.ApplyFilter.bind(this);
+    this.genreFilter = this.genreFilter.bind(this);
+    this.submit2 = this.submit2.bind(this); 
   }
 
   handleChange = e => {
@@ -41,6 +44,7 @@ class Navigation extends Component {
     e.preventDefault();
     e.persist()
     this.setState({year: e.target.innerText})
+    this.setState({submit: true})
     this.props.setFilter(this.state)
     if(e.target.innerText){
       this.props.setFilterArray(this.state)
@@ -54,7 +58,9 @@ class Navigation extends Component {
     e.preventDefault();
     e.persist()
     this.setState({genres: e.target.innerText})
+    this.setState({submit: true})
     this.props.setFilter(this.state)
+    
     if(e.target.innerText){
       this.props.setFilterArray(this.state)
     }else{
@@ -76,8 +82,21 @@ class Navigation extends Component {
     e.persist();
     const {search,year,genres,submit} = this.state
     this.setState({submit: true})
+    console.log('submit2 click problem', this.state);
     this.props.setFilter(this.state.search);
     this.props.setFilterArray(this.state);
+    // this.setState({})
+  };
+  ApplyFilter = (e) => {
+      e.preventDefault();
+      e.persist();
+
+    
+      this.setState({submit: true})      
+      console.log('double click problem', this.state);
+      this.props.setFilter(this.state.search);
+      this.props.setFilterArray(this.state);
+    
     // this.setState({})
   };
   
@@ -116,9 +135,12 @@ class Navigation extends Component {
               </div>
               <ul>
                 
-                <li onClick={this.submit2} className = "Genre"><a href="#">Apply filter</a></li>
-                <li onClick={this.handleClear} className = "Genre"><a href="#">Clear</a></li>
-                <li className = "Genre"><a href="#">Genre</a>
+                <li onClick={this.ApplyFilter} style = {{fontSize: "1.5rem", fontWeight: "bold"}}className = "Genre"><a href="#">Apply filter</a></li>
+
+                <li onClick={this.handleClear} style = {{fontSize: "1.5rem", fontWeight: "bold"}}className = "Genre"><a href="#">Clear</a></li>
+
+                <li className = "Genre"><a href="#">Genre <FontAwesomeIcon className="angle-down-icon" icon={faAngleDown} />
+                <i className="far fa-angle-down"></i></a>
                 <ul className="dropdown">
                 {
                   genresArray.map(x => { return <li onClick={this.genreFilter}>{x}</li>})
@@ -128,7 +150,8 @@ class Navigation extends Component {
                 
                 </li>
 
-                <li className= "Year"><a href="#">Year</a>
+                <li className= "Year"><a href="#">Year <FontAwesomeIcon className="angle-down-icon" icon={faAngleDown} />
+                <i className="far fa-angle-down"></i></a>
                 <ul className="dropdown">
                   <li onClick={this.handleFilter}>2020</li>
                   <li onClick={this.handleFilter}>2019</li>
@@ -183,9 +206,20 @@ class Navigation extends Component {
                 
                 </ul>
                 </li>
+                <li className = "Genre"><a href="#">Language <FontAwesomeIcon className="angle-down-icon" icon={faAngleDown} />
+                <i className="far fa-angle-down"></i></a>
+                
+                <ul className="dropdown">
+                {/* {
+                  genresArray.map(x => { return <li onClick={this.genreFilter}>{x}</li>})
+
+                } */}
+                </ul>
+                
+                </li>
 
                 {/* We also wanted to implement sorting by these criteria as well, but ran out of
-                time to do so. */}
+                time to do so. values need to be added to table such as languages etc. down below.*/}
 
                 {/* <li><a href="#">Decade</a></li> */}
                 {/* <li><a href="#">MPAA Rating</a></li>
@@ -290,7 +324,7 @@ class Navigation extends Component {
             />
             <i className="far fa-user-circle"></i>
 
-            <FontAwesomeIcon className="angle-down-icon" icon={faAngleDown} />
+            <FontAwesomeIcon className="angle-down-icon hidden" icon={faAngleDown} />
             <i className="far fa-angle-down"></i>
           </div>
         </div>

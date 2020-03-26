@@ -1,8 +1,24 @@
 import React, {useState, useEffect} from "react";
 import Stars from "@material-ui/lab/Rating";
 // more fields will be appearing according to the Figma file
-export default function MovieCard2({ name, year, image, genres, runtime, avgRating, ratingAction, userid}) {
-  const [value2, setValue] = useState(0);
+export default function FilterCard({ name, year, image, genres, runtime, avgRating, ratingAction, userid}) {
+  const [rating, setRating] = useState(0);
+
+  let newRating = {
+    name: name,
+    year: year,
+    rating: rating,
+  }
+
+  const handleChange = (event, newValue) => {
+    /* Sets rating for the star value */
+    setRating(newValue);
+    /* Sets rating for the POST request */
+    newRating = {
+      ...newRating, rating: newValue
+    }
+    ratingAction(userid, newRating)
+  }
  
   // useEffect(() => { 
   //   ratingAction(userid, value2)
@@ -19,11 +35,8 @@ export default function MovieCard2({ name, year, image, genres, runtime, avgRati
         <Stars data-test="star"
         precision={0.5}
           name={name}
-          value={value2 ? value2  : avgRating/2.0}
-          onChange={(event, newValue) => {
-            setValue(newValue);
-            ratingAction(userid, newValue)
-          }}
+          value={rating ? rating  : avgRating/2.0}
+          onChange={handleChange}
         />
       </div>
     </div>

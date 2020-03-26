@@ -6,7 +6,7 @@ import { ratingAction } from "../../store/actions/index.js";
 
 // children components
 import LoadingScreen from "../layout/LoadingScreen.js";
-import MovieCard2 from "../movies/MovieCard2.js";
+import FilterCard from "../movies/FilterCard.js";
 
 function Filter({
   userid,
@@ -35,7 +35,7 @@ function Filter({
             let moviePoster = `https://image.tmdb.org/t/p/w500${posterURI}?api_key=${process.env.REACT_APP_TMDB_API_KEY}`;
 
             return (
-              <MovieCard2
+              <FilterCard
                 key={index}
                 name={x.Title}
                 year={x.Year}
