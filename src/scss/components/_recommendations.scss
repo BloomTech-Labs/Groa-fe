@@ -17,7 +17,8 @@
       height: auto;
       margin: 3% auto;
       display: flex;
-      flex-direction: column;
+      flex-direction: column !important;
+
       .top-content {
         display: flex;
       }

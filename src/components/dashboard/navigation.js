@@ -236,12 +236,6 @@ class Navigation extends Component {
                   {/* menu end ------------------------------------------------------ */}
           <div id="main-menu" className="Links">
             <img src={GroaLogo} alt="Groa Logo" />
-            <NavLink
-              className="Groa-NavLink"
-              to={`/${this.props.userid}/recommended`}
-            >
-              Groa
-            </NavLink>
                          
             <NavLink
               className="NavLink hidden"

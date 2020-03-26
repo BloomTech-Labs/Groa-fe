@@ -17,8 +17,8 @@ function Filter({
   response
 }) {
   
-  if (isFetchingFilter === true) return <LoadingScreen />;
-  else
+  // if (isFetchingFilter === true) return <LoadingScreen />;
+  // else
     return (
       <div
         className="container recommendations"
