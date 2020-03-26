@@ -57,31 +57,6 @@ function Recommendations({
             );
           })}
         </div>
-        {/* <div className="movie-cards">
-          {recommendations.map((x, index) => {
-            let posterURI = x["Poster URL"];
-            let unsplashUrl =
-              "https://source.unsplash.com/collection/1736993/500x650";
-            let moviePoster = `https://image.tmdb.org/t/p/w500${posterURI}?api_key=${process.env.REACT_APP_TMDB_API_KEY}`;
-
-            return (
-              <MovieCard
-                key={index}
-                name={x.Title}
-                year={x.Year}
-                image={
-                  !posterURI ||
-                  posterURI === "None" ||
-                  posterURI === "No poster" ||
-                  posterURI === "No Poster" ||
-                  posterURI === "Not in table"
-                    ? unsplashUrl
-                    : moviePoster
-                }
-              />
-            );
-          })}
-        </div> */}
       </div>
     );
 }

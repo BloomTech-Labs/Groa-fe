@@ -1,8 +1,7 @@
 .mainContainer {
-  font-family: $workSans;
- 
-  background: gray;
+  background: #000A12;
   padding: 1.1% 1%;
+  //font-family: $workSans;
   .navContainer {
     display: flex;
     justify-content: space-between;
@@ -165,12 +164,15 @@
       width: 60%;
       display: flex;
       justify-content: space-evenly;
-      padding-top: 7px;
+      a.active{
+        border-bottom: 3px solid #00E6BC;
+      }
 
+      img{
+        width: 120px;
+        height: auto;
+      }
       .Groa-NavLink {
-        color: white;
-        font-weight: 600;
-        text-decoration: none;
 
         &:hover {
           color: rebeccapurple;
@@ -180,11 +182,14 @@
       .NavLink {
         color: white;
         text-decoration: none;
+        padding-top: 1%;
+    
         &:hover {
           color: rebeccapurple;
           text-decoration: underline;
         }
       }
+       
     }
     button {
       white-space: nowrap;
@@ -216,4 +221,5 @@
   .searchContainer.hidden {
     display: none;
   }
+  
 }

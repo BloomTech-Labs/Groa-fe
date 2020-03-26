@@ -3,14 +3,14 @@ import { render } from "@testing-library/react";
 import { getAllByTestId } from "../../utils/test-utils.js";
 import { BrowserRouter as Router } from "react-router-dom";
 // component to be tested.
-import Recommendations from "./Recommendations.js";
+import Ratings from "./Ratings.js";
 //  redux testing
 import { Provider } from "react-redux";
 import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
 const mockStore = configureStore([thunk]);
 
-it("renders Recommendations with array has length.", async () => {
+it("renders Ratings with array has length.", async () => {
   let store = mockStore({
     login: {
       userid: 4
@@ -22,7 +22,7 @@ it("renders Recommendations with array has length.", async () => {
       success: false,
       error: ""
     },
-    recommendations: {
+    rating: {
       movies: [
         { Title: "The Godfather", Year: "1972" },
         { Title: "The Wizard of Oz", Year: "1939" },
@@ -32,26 +32,22 @@ it("renders Recommendations with array has length.", async () => {
     },
     upload: {
       isUploading: true
-    },
-    watchlist: {
-      movies: [],
-      isFetching: false
     }
   });
 
   const { container } = render(
     <Provider store={store}>
       <Router>
-        <Recommendations />
+        <Ratings />
       </Router>
     </Provider>
   );
 
-  let component = getAllByTestId(container, "recommendations-component");
+  let component = getAllByTestId(container, "ratings-component");
   expect(component.length).toBe(1);
 });
 
-it("renders LoadingScreen when recommendations array is empty", () => {
+it("renders LoadingScreen when ratings array is empty", () => {
   let store = mockStore({
     login: {
       userid: 4
@@ -60,23 +56,19 @@ it("renders LoadingScreen when recommendations array is empty", () => {
       success: false,
       error: ""
     },
-    recommendations: {
+    rating: {
       isFetching: true,
       movies: [],
       error: ""
     },
     upload: {
       isUploading: false
-    },
-    watchlist: {
-      movies: [],
-      isFetching: false
     }
   });
   const { container } = render(
     <Provider store={store}>
       <Router>
-        <Recommendations />
+        <Ratings />
       </Router>
     </Provider>
   );

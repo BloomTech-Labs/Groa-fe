@@ -8,13 +8,15 @@ import {
   faUserCircle,
   faAngleDown,
   faBars,
-  faSyncAlt
+  faSync
 } from "@fortawesome/free-solid-svg-icons";
 import { faBell, faQuestionCircle } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ifDev } from "../../utils/removeAttribute.js";
 import { setFilter, setFilterArray } from "../../store/actions/filterActions"; 
 import "../../scss/components/_navigation.scss";
+import GroaLogo from "../auth/Groa-logo-B2AA.png";
+
 class Navigation extends Component {
   constructor(props) {
     super(props);
@@ -233,13 +235,14 @@ class Navigation extends Component {
           </div>
                   {/* menu end ------------------------------------------------------ */}
           <div id="main-menu" className="Links">
+            <img src={GroaLogo} alt="Groa Logo" />
             <NavLink
               className="Groa-NavLink"
               to={`/${this.props.userid}/recommended`}
             >
               Groa
             </NavLink>
-
+                         
             <NavLink
               className="NavLink hidden"
               to={`/${this.props.userid}/trending`}
@@ -253,6 +256,13 @@ class Navigation extends Component {
               to={`/${this.props.userid}/recommended`}
             >
               Recommended
+            </NavLink>
+
+            <NavLink
+              className="NavLink"
+              to={`/${this.props.userid}/ratings`}
+            >
+              Ratings
             </NavLink>
 
             {/* adding this here until all other nav functionality is added */}
@@ -296,6 +306,12 @@ class Navigation extends Component {
           </div>
           
           <form  onSubmit={this.submit2} className="searchContainer">
+          <button className="recommendations-button" onClick={()=>this.getNewRecommendations(this.props.userid)}>
+              <FontAwesomeIcon className="sync-icon" icon={faSync} />
+                <i className="fas fa-sync"></i> Update your recs
+          </button>
+
+          
             <FontAwesomeIcon className="search-icon fa-icons" icon={faSearch} />
             <input
               className="searchBox"

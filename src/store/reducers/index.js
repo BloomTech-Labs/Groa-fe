@@ -5,6 +5,7 @@ import { register } from './registerReducer';
 import { recommendations } from './recommendationReducer';
 import { upload } from './uploadReducer';
 import { filter } from './filterReducer'; 
+import { watchlist } from './watchlistReducer';
 
 export const reducer = combineReducers({
   login,
@@ -13,4 +14,5 @@ export const reducer = combineReducers({
   recommendations,
   upload,
   filter, 
+  watchlist
 });

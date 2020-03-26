@@ -1,14 +1,20 @@
 import {
     ADDING_RATING_START,
     ADDING_RATING_SUCCESS,
-    ADDING_RATING_FAIL
+    ADDING_RATING_FAIL,
+
+    FETCHING_RATINGS_START,
+    FETCHING_RATINGS_SUCCESS,
+    FETCHING_RATINGS_FAIL
   } from "../actions/ratingAction";
 
   
   const initialState = {
+    movies: [],
     isAdding: false,
-    error: "",
-    response: null
+    response: null,
+    isFetching: false,
+    error: ""
   };
   
   export const rating = (state = initialState, action) => {
@@ -34,6 +40,35 @@ import {
           error: action.payload
         };
   
+     
+
+      ///////////////////////////////////////////////
+      case FETCHING_RATINGS_START:
+        return {
+          ...state,
+          isFetching: true
+        }
+      //RATINGS SUCCESS
+      case FETCHING_RATINGS_SUCCESS:
+        return {
+          ...state,
+          isFetching: false,
+          movies: action.payload
+        };
+  
+      //RATINGS FAIL
+      case FETCHING_RATINGS_FAIL:
+        return {
+          ...state,
+          isFetching: false,
+          error: action.payload
+        };
+  
+  
+
+
+
+
       default:
         return state;
     }
