@@ -16,8 +16,9 @@ function Filter({
   ratingAction,
   response
 }) {
-  // it appears that if we use dev.groa.us filter doesn't work, but if we use
-  // api.groa.us filter works and watchlist does not work.
+  // it appears that if we use dev.groa.us filter doesn't work but watchlist does, but if we use
+  // api.groa.us filter works and watchlist does not work, so we have yet to fully test if watchlist box works
+  // in production.
   if (isFetchingFilter === true) return <LoadingScreen />;
   else
     return (
