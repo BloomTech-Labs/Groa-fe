@@ -1,8 +1,26 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
+import { connect } from "react-redux";
 import Stars from "@material-ui/lab/Rating";
+import StarBorderIcon from '@material-ui/icons/StarBorder';
+import { addToWatchlistAction, removeFromWatchlistAction } from "../../store/actions";
 // more fields will be appearing according to the Figma file
-export default function FilterCard({ name, year, image, genres, runtime, avgRating, ratingAction, userid}) {
+function FilterCard({ name, year, image, genres, runtime, avgRating, ratingAction,watchlist, addToWatchlistAction, removeFromWatchlistAction, userid}) {
   const [rating, setRating] = useState(0);
+
+  const [added, setAdded] = useState(false)
+  /* This checks if the movie is in the watchlist */
+  const inWatchlist = watchlist.some(movie => movie.name === name && movie.year === year)
+  /* Used to format the movie object for action calls */
+  let movie = {
+    name: name,
+    year: year,
+  }
+
+  const handleClick = () => {
+    /* Adds movie to the POST request */
+      addToWatchlistAction(userid, movie)
+      setAdded(true)
+  }
 
   let newRating = {
     name: name,
@@ -20,20 +38,38 @@ export default function FilterCard({ name, year, image, genres, runtime, avgRati
     ratingAction(userid, newRating)
   }
  
-  // useEffect(() => { 
-  //   ratingAction(userid, value2)
-  // },[avgRating])
+  
 
   return (
     <div data-test="box" className="box">
-      <img src={image} alt="Random Movie poster as a placeholder." />
-      <div className="text-container">
-        <h3>{name}</h3>
-        <p>{year}</p>
-        <p>{genres.split(',').join(" ")}</p>
-        <p>{Number(runtime)} min.</p>
-        <Stars data-test="star"
-        precision={0.5}
+      <div className="top-content">
+        <img src={image} alt="Random Movie poster as a placeholder." />
+        <div className="text-container">
+          <h3>{name}</h3>
+          <p>{year}</p>
+          <p>{genres.split(',').join(" ")}</p>
+          <p>{Number(runtime)} min.</p>
+        </div>
+      </div>
+        <div className="action-panel">
+          <button 
+            className="watchlist-button"
+            onClick={handleClick}
+            disabled={ added || inWatchlist ? true : false }
+          >
+          { !added && !inWatchlist ? "Add to watchlist" : "In your watchlist" }
+        </button>
+        <Stars 
+          className="stars"
+          data-test="star"
+          precision={0.5}
+          size="large"
+          emptyIcon={
+            <StarBorderIcon 
+              fontSize="inherit" 
+              style={{color:"#ffb400"}} 
+            />
+          }
           name={name}
           value={rating ? rating  : avgRating/2.0}
           onChange={handleChange}
@@ -42,3 +78,12 @@ export default function FilterCard({ name, year, image, genres, runtime, avgRati
     </div>
   );
 }
+const mapStateToProps = state => {
+  return {
+    userid: state.login.userid,
+    ratingError: state.rating.error,
+    watchlist: state.watchlist.movies,
+    watchlistError: state.watchlist.error
+  };
+};
+export default connect(mapStateToProps, { addToWatchlistAction, removeFromWatchlistAction })(FilterCard);

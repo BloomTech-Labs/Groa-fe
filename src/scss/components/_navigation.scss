@@ -1,7 +1,7 @@
 .mainContainer {
   background: #000A12;
   padding: 1.1% 1%;
-  //font-family: $workSans;
+  font-family: "Work Sans", sans-serif;
   .navContainer {
     display: flex;
     justify-content: space-between;
@@ -175,7 +175,7 @@
       .Groa-NavLink {
 
         &:hover {
-          color: rebeccapurple;
+          color:white;
           text-decoration: underline;
         }
       }
@@ -185,7 +185,7 @@
         padding-top: 1%;
     
         &:hover {
-          color: rebeccapurple;
+          color:white;
           text-decoration: underline;
         }
       }

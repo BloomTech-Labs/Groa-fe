@@ -104,12 +104,13 @@ class Navigation extends Component {
   
   logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("state");
   };
 
-  getNewRecommendations = (id) => {
+  getNewRecommendations = id => {
     // Gets new recommendations for account, if applicible
-    this.props.recommendationAction(id)
-  }
+    this.props.recommendationAction(id);
+  };
 
   
   render() {
@@ -236,7 +237,7 @@ class Navigation extends Component {
                   {/* menu end ------------------------------------------------------ */}
           <div id="main-menu" className="Links">
             <img src={GroaLogo} alt="Groa Logo" />
-                         
+                        
             <NavLink
               className="NavLink hidden"
               to={`/${this.props.userid}/trending`}
@@ -252,10 +253,7 @@ class Navigation extends Component {
               Recommended
             </NavLink>
 
-            <NavLink
-              className="NavLink"
-              to={`/${this.props.userid}/ratings`}
-            >
+            <NavLink className="NavLink" to={`/${this.props.userid}/ratings`}>
               Ratings
             </NavLink>
 
@@ -273,11 +271,7 @@ class Navigation extends Component {
               Logout
             </NavLink>
 
-            <NavLink
-              className="NavLink"
-              to={`/${this.props.userid}/watchlist`}
-            >
-              {/* hidden */}
+            <NavLink className="NavLink" to={`/${this.props.userid}/watchlist`}>
               Watchlist
             </NavLink>
                 {/* --------------------------marked hidden links above and below in classNames

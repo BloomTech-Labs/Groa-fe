@@ -16,9 +16,10 @@ function Filter({
   ratingAction,
   response
 }) {
-  
-  // if (isFetchingFilter === true) return <LoadingScreen />;
-  // else
+  // it appears that if we use dev.groa.us filter doesn't work, but if we use
+  // api.groa.us filter works and watchlist does not work.
+  if (isFetchingFilter === true) return <LoadingScreen />;
+  else
     return (
       <div
         className="container recommendations"

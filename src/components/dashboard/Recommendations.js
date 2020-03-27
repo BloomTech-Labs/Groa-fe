@@ -2,7 +2,11 @@ import React, { useEffect } from "react";
 // tools
 import { connect } from "react-redux";
 import { ifDev } from "../../utils/removeAttribute.js";
-import { recommendedAction } from "../../store/actions/index.js";
+import {
+  recommendedAction,
+  recommendationAction,
+  toggleIsUploaded
+} from "../../store/actions/index.js";
 // children components
 import LoadingScreen from "../layout/LoadingScreen.js";
 import MovieCard from "../movies/MovieCard.js";
@@ -14,12 +18,19 @@ function Recommendations({
   userid,
   recommendedAction,
   isUploading, 
-  searchTerm
+  searchTerm,
+  recommendationAction,
+  isUploaded
 }) {
   useEffect(() => {
+    // returns initial recommendations after uploading a file
+    if (isUploaded === true) {
+      recommendationAction(userid);
+      toggleIsUploaded();
+    }
     // Returns the most recent recommendations from the database
     recommendedAction(userid);
-  }, [userid, recommendedAction, recommendations, isUploading]);
+  }, [recommendedAction, userid, isUploaded, recommendationAction]);
 
   if (isFetching) return <LoadingScreen />;
   else
@@ -28,8 +39,6 @@ function Recommendations({
         className="container recommendations"
         data-test={ifDev("recommendations-component")}
       >
-        <h2>Your recommendations</h2>
-        
         <div className="movie-cards">
         {recommendations.filter(post =>
         searchTerm.search !== '' ? post.Title.toString().toLowerCase().includes(searchTerm.toString().toLowerCase()) : true).map((x, index) =>{
@@ -52,7 +61,6 @@ function Recommendations({
                     ? unsplashUrl
                     : moviePoster
                 }
-                
               />
             );
           })}
@@ -67,11 +75,15 @@ const mapStateToProps = state => {
     isFetching: state.recommendations.isFetching,
     recommendations: state.recommendations.movies,
     recommendationsError: state.recommendations.error,
-    isUploading: state.upload.isUploading,
+    isUploading: state.upload.isUploading, //wasnt sure to keep this after pulling from master looks like is has been moved to isUploaded.
     searchTerm: state.filter.searchTerm,
-    searchArray: state.filter.searchArray
+    searchArray: state.filter.searchArray,
+    isUploaded: state.upload.isUploaded
   };
 };
-export default connect(mapStateToProps, { recommendedAction })(
-  Recommendations
-);
+
+export default connect(mapStateToProps, {
+  recommendedAction,
+  recommendationAction,
+  toggleIsUploaded
+})(Recommendations);

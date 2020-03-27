@@ -3,25 +3,36 @@ import ReactLoading from "react-loading";
 import { connect } from "react-redux";
 import { ifDev } from "../../utils/removeAttribute.js";
 
-function LoadingScreen({ isUploading, isFetchingRecommendations, isFetchingWatchlist, isFetchingFilter }) {
+function LoadingScreen({ 
+  isUploading, 
+  isFetchingRecommendations, 
+  isFetchingWatchlist,
+  isFetchingRatings,
+  isFetchingFilter  
+  }) {
   return (
     <div
       className="container loading-screen"
       data-test={ifDev("loading-screen-component")}
     >
-      {/* {isUploading ? (
+      {isUploading ? (
         <h4>Uploading files...</h4>
-      ) : isFetchingFilter ? 
+        ) 
+
+        : isFetchingFilter ? 
         (<h4>Loading Filtered Movies...</h4>)
-        :(
-      ) : 
+        : 
       isFetchingWatchlist ? (
         <h4>Loading watchlist...</h4>
       ) :
       isFetchingRecommendations ? (
         <h4>Loading recommendations...</h4>
       ) : 
-      null} */}
+      isFetchingRatings ? (
+        <h4>Loading ratings...</h4>
+      ) : 
+      null} 
+     
       <ReactLoading
         className="loading-component"
         data-test={ifDev("loading-object")}
@@ -43,7 +54,8 @@ const mapStateToProps = state => {
     isUploading: state.upload.isUploading,
     isFetchingFilter: state.filter.isFetchingFilter,
     isFetchingWatchlist: state.watchlist.isFetching,
-    isFetchingRecommendations: state.recommendations.isFetching
+    isFetchingRecommendations: state.recommendations.isFetching,
+    isFetchingRatings: state.rating.isFetching
   };
 };
 
