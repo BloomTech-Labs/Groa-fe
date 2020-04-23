@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
 const RegisterSchema = Yup.object().shape({
   user_name: Yup.string().required("Username is required"),
   email: Yup.string().email().required("Email is required"),
-  password: Yup.string().min(6).required("Password is required"),
+  password: Yup.string().min(8).required("Password is required"),
   confirmpassword: Yup.string()
     .oneOf([Yup.ref("password"), null], "Passwords must match")
     .required(),
@@ -161,7 +161,7 @@ const Register = (props) => {
                 <p>Password required</p>
               )}
               {errors.password && errors.password.type === "min" && (
-                <p>Password must be at least 6 characters long</p>
+                <p>Password must be at least 8 characters long</p>
               )}
               {/* </Grid> */}
               {/* <Grid container item xs={12}> */}
