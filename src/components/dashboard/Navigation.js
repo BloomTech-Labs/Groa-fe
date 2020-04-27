@@ -75,10 +75,10 @@ const useStyles = makeStyles(theme => ({
     // alignItems:'center',
     position: "relative",
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#5c5b5b',
     "&:hover": {
-      backgroundColor: '#5c5b5b',
-      color:'#ffffff',
+      backgroundColor: '#ffffff',
+      color:'#5c5b5b',
     },
     width: "100%",
     [theme.breakpoints.up("sm")]: {
@@ -100,9 +100,9 @@ const useStyles = makeStyles(theme => ({
     },
   },
   inputRoot: {
-    color: "#505050",
+    color: "#ffffff",
     "&:hover": {
-      color:'#ffffff',
+      color:'#505050',
     },
   },
   inputInput: {
@@ -208,7 +208,7 @@ const Navigation = props => {
     icon: <ThumbUpRoundedIcon /> 
   },
   {
-    name: "Wishlist",
+    name: "Watchlist",
     icon: <PlaylistAddCheckRoundedIcon /> 
   },
   {
