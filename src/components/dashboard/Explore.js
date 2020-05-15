@@ -57,12 +57,13 @@ function Explore({
       <GridList
         className={classes.cardGrid}
         cols={screenWidth ? 3 : 5}
-        cellHeight="auto"
-      >
+        cellHeight='auto'>
         {movies
           .filter((movie) =>
             !ratings.includes(
-              (film) => film.title === movie.title && film.year === movie.year
+              (film) =>
+                film.primary_title === movie.primary_title &&
+                film.start_year === movie.start_year
             ).length && searchTerm !== ""
               ? movie.primary_title
                 .toString()
@@ -74,7 +75,10 @@ function Explore({
           .map((movie, index) => {
             /* Checks if the film is in ratings */
             const isRated = (film) => {
-              return film.title === movie.title && film.year === movie.year;
+              return (
+                film.primary_title === movie.primary_title &&
+                film.start_year === movie.start_year
+              );
             };
             /* Returns the movie object if in ratings */
             let rated = ratings.find(isRated);
@@ -87,8 +91,8 @@ function Explore({
                 <MovieCard
                   key={index}
                   page={"Explore"}
-                  name={movie.title}
-                  year={movie.year}
+                  name={movie.primary_title}
+                  year={movie.start_year}
                   movie_id={movie.movie_id}
                   description={movie.description}
                   trailer={movie.trailer_url}
